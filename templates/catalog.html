@@ -68,7 +68,7 @@
             font-size: 19px;
             width: 120px;
             height: 45px;
-            margin-top: -33px;
+            margin-top: -37px;
             margin-right: 20px;
             background-color: black;
             color: white;   
@@ -95,7 +95,7 @@
     <p>You found {items.length} items.</p>
     <div id="result">
         <ul v-for='(item, i) in items'>
-            <li>Name: {item.name}</li>&nbsp; <b>|</b>
+            <li>Name: {item.name}</li>&nbsp;&nbsp;&nbsp; <b>|</b>
             <li>Desc.: {item.description}</li>&nbsp;
             <br>
             <button id="confirm_" @click="buy(item.pk)">Buy</button>
