@@ -156,12 +156,14 @@
                 that = this;
                 // location.href = "buy.html"
                 axios.get("buy/"+oid).then(function(response) {
-                    if (response.data.errorMsg != null) {
+                    if (response.data.status_code == 1) {
                         alert("Please log in first!");
                         location.href = "login.html"
+                    } else if (response.data.status_code == 2) {
+                        alert("Item does not exist!")
+                        return
                     } else {
                         location.href = "confirm.html"
-                        
                     }
                 }).catch(function(err) {
                     alert('Error');
