@@ -124,12 +124,12 @@
                 },
                 confirm: function() {
                     that = this;
-                    if (that.password == '') {
-                        alert("Password cannot be empty!")
+                    if (that.amount == '') {
+                        alert("Amount cannot be empty!")
                         return
                     }
-                    if (that.email == '') {
-                        alert("E-mail cannot be empty!")
+                    if (that.address_x == '' || that.address_y == '') {
+                        alert("Address cannot be empty!")
                         return
                     }
                     axios.get("confirm/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
