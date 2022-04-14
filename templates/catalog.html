@@ -133,7 +133,9 @@
                         alert("Search input cannot be empty!")
                         return
                     }
+
                     axios.get("search/"+that.name).then(function(response) {
+                        console.log(response.data[0].fields)
                         if (response.data.errorMsg != null) {
                             alert("Please log in first!");
                             location.href = "login.html"
