@@ -73,7 +73,7 @@
                 Name: &nbsp;<input id="u"type="text" v-model="name" disabled><br>
                 Desc.: &nbsp;<input id="p" type="text" v-model="description" disabled required><br>
                 Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
-                Your Address: X_coordinate:&nbsp;<input type="number" v-model="address_x" required >&nbsp;Y_Coordinate: <input type="number" v-model="address_y" required>
+                Your Address: X_coordinate:&nbsp;<input type="number" v-model="address_x" required >&nbsp;<br>Y_Coordinate: <input type="number" v-model="address_y" required>
             
 
                 <button @click="cancel">Cancel</button>
@@ -107,12 +107,10 @@
                             alert("Error: please choose a product first.")
                             location.href = "catalog.html"
                         } else { 
-                            console.log(response)
                             that.name = response.data[0].fields.name
                             that.description = response.data[0].fields.description
                             that.email = response.data[0].fields.email
                             that.product_id = response.data[0].pk
-                            console.log(that.name)
                         }
                     }).catch(function(err) {
                         alert('Error');
@@ -130,10 +128,6 @@
                     }
                     if (that.email == '') {
                         alert("E-mail cannot be empty!")
-                        return
-                    }
-                    if (that.email.match("[a-zA-Z0-9]+@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+") == null) {
-                        alert("Invalid Email address!")
                         return
                     }
                     axios.get("confirm/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
