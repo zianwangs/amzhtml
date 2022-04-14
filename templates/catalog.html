@@ -119,6 +119,7 @@
                     } else {
                         that.items = []
                         for (i = 0; i < response.data.length; ++i) {
+                            response.data[i].fields["product_id"] = response.data[i].pk
                             that.items.push(response.data[i].fields)
                         }
                     }
@@ -135,13 +136,13 @@
                     }
 
                     axios.get("search/"+that.name).then(function(response) {
-                        console.log(response.data)
                         if (response.data.errorMsg != null) {
                             alert("Please log in first!");
                             location.href = "login.html"
                         } else {
                             that.items = []
                             for (i = 0; i < response.data.length; ++i) {
+                                response.data[i].fields["product_id"] = response.data[i].pk
                                 that.items.push(response.data[i].fields)                   
                             }
                             
