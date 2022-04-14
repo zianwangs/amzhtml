@@ -79,7 +79,7 @@
     <div id="drive_search">
         &nbsp;<input type="text" v-model="name" placeholder = "Search for Anything" required maxlength="50" @keyup.enter="search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button @click="search">Search</button><br>
-    You found {orders.length} items.
+    You found {orders.length} items.<br>
     <div id="result">
         <ul v-for='(item, i) in goods'>
             <li>Name: {item.name}</li>&nbsp;
