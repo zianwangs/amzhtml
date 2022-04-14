@@ -1,0 +1,33 @@
+body {
+    font: 16px/28px 'SongST';
+}
+p {
+    text-indent: 2em;
+}
+h1 {
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Microsoft Yahei';
+}
+
+.gray {
+    color: #888888;
+    text-align: center;
+    font-size: 12px;
+}
+
+.left {
+    text-align: left;
+}
+
+.button {
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+}
+
+.pic {
+    text-align: center;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        . {
+            padding: 0;
+            margin: 0;
+        }
+        .d {
+            height: 100px;
+            width: 200px;
+        }
+
+        .dd {
+            float: left;
+            background-color: blue;
+            height: 100%;
+            width: 50%;
+        }
+
+        .ddd {
+            display: none;
+            float: left;
+            background-color: blue;
+            height: 100%;
+            width: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="d">
+        <div class="dd"></div>
+        <div class="ddd"></div>
+    </div>
+    <script>
+        var d = document.querySelector('.d');
+        d.children[0].onmouseover = function() {
+            this.nextElementSibling.style.display = 'block';
+        }
+        d.children[0].onmouseout = function() {
+            this.nextElementSibling.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+

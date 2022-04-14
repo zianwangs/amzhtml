@@ -1,0 +1,236 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.w {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.h {
+    height: 50px;
+}
+
+.header {
+    margin: 20px auto;
+    height: 50px;
+}
+
+li {
+    list-style: none;
+}
+
+.header ul li {
+    list-style: none;
+    float: left;
+    height: 50px;
+    margin-left: 40px;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+.header ul li a {
+    display: block;
+    line-height: 50px;
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 0px 5px;
+}
+.header ul li a:hover {
+    border-bottom: 2px solid #00a4ff;
+}
+
+.mid {
+    background-image: url(https://img1.baidu.com/it/u=1530170817,1465698496&fm=26&fmt=auto&gp=0.jpg);
+    background-color: lightblue;
+    height: 400px;
+}
+.f {
+    float: left;
+}
+.list {
+    float: left;
+}
+
+img {
+    height: 100%;
+}
+
+.search {
+    width: 420px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+.search input {
+    float: left;
+    margin-top: 7px;
+    width: 360px;
+    height: 32px;
+    border: 1px solid skyblue;
+    border-right: 0;
+    color: #777;
+    font-size: 14px;
+    text-indent: 1em;
+}
+.search button {
+    float: left;
+    margin-top: 7px;
+    width: 40px;
+    height: 34px;
+    background-color: #fff;
+    border: 1px solid skyblue;
+    background-size: 28px 24px;
+    background-position: 4px 4px;
+    background-repeat: no-repeat;
+    background-image: url(https://img0.baidu.com/it/u=312188461,1084323428&fm=26&fmt=auto&gp=0.jpg);
+}
+
+.user {
+    float: right;
+}
+
+.user img {
+    margin-top: 9px;
+    float: left;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.user p {
+    font-family:Arial, sans-serif;
+    float: left;
+    margin-left: 12px;
+    line-height: 51px;
+    color: #666;
+}
+
+.mid .banner {
+    width: 1100px;
+    height: 100%;
+    margin-left: 100px;
+    background-size: 1100px 100%;
+    background-repeat: no-repeat;
+    background-image: url(http://www.itheima.com/special/brandzly/images/ban1.jpg);
+}
+
+.banner .list {
+    width: 200px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+.banner .list ul li {
+    height: 44px;
+    text-indent: 1.5em;
+    padding-right: 18px;
+}
+
+.banner .list ul li a {
+    color:white;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 44px;
+    font-weight: 700;
+
+}
+
+.banner .list ul li a:hover {
+    color: orange;
+}
+
+.banner .list span {
+    float: right;
+}
+
+.banner .course {
+    float: right;
+    width: 210px;
+    height: 300px;
+    margin-top: 50px;
+    background-color: white;
+}
+
+.banner .course h3 {
+    font-size: 18px;
+    text-align: center;
+    color:white;
+    padding: 5px 0;
+    background-color: skyblue;
+}
+
+.course .bd {
+    padding: 0px 20px;
+}
+
+.course .bd ul li {
+    padding: 15px 0px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.course .bd h4 {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.course .bd p {
+    font-size: 12px;
+    color: gray;
+    line-height: 20px;
+}
+
+.course .bd a {
+    color: skyblue;
+    display: block;
+    height: 30px;
+    margin-top: 8px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid skyblue;
+    font-weight: 700;
+    font-size: 16px;
+    
+}
+
+.recommend {
+    margin-left: 100px;
+    width: 1100px;
+    height: 60px;
+    margin-top: 10px;
+    box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.1 );
+}
+
+.recommend ul li{
+    height: 30px;
+    line-height: 30px;
+    margin-top: 15px;
+    padding: 0 40px;
+    float: left;
+    font-weight: 500;
+    border-right: 1px solid #d0d0d0;
+}
+
+.recommend ul {
+    float: left;
+}
+.recommend h3 {
+    font-family:fantasy;
+    float: left;
+    line-height: 65px;
+    font-weight: 700;
+    margin-left: 25px;
+    margin-right: 40px;
+}
+
+.recommend li a:hover {
+    color: #00a4ff;
+}
+
+.recommend ul .rightmost_li {
+    border : 0;
+}
