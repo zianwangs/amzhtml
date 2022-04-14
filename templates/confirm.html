@@ -140,8 +140,12 @@
                         if (response.data.status_code == 1) {
                             alert("Please log in first!");
                             location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Item does not exist.")
+                            location.href = "catalog.html" 
                         } else {
-                            alert("Information submitted!")
+                            alert("Order submitted!")
+                            location.href = "orders.html"
                         }
                     }).catch(function(err) {
                         alert('Error');

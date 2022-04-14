@@ -55,23 +55,15 @@
 </head>
 <body>
     <div id="orders_body">
-    <h2>Open:</h2>
+    <h2>Your Orders:</h2>
     <ul v-for='item in open_list'>
         <li>Order No: #{item.id},</li> 
         <li>Dest.: {item.destination},</li> 
         <li>Arr. Time: {item.arrival_time},</li>
         <li>Status:<b style="color:green"> {item.status}</b></li>
-        <button id="edit_" @click="view(item.id, false)">View</button>
+        <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
     <br>
-    <h2>Confirmed:</h2>
-    <ul v-for='item in confirmed_list'>
-        <li>Order No: #{item.id},</li> 
-        <li>Dest.: {item.destination},</li> 
-        <li>Arr. Time: {item.arrival_time},</li>
-        <li>Status:<b style="color:blue"> {item.status}</b></li>
-        <button id="edit_" @click="view(item.id, true)">View</button>
-    </ul>
     
     </div>
     <script>
@@ -79,8 +71,7 @@
             el:"#orders_body",
             delimiters: ['{', '}'],
             data:{
-                open_list: [],
-                confirmed_list: [],
+                order_list: [],
             },
             mounted: function() {
                 that = this;
@@ -89,18 +80,11 @@
                     if (response.data.status_code == 1) {
                         alert("Please log in first!")
                     } else {
-                        that.open_list = []
-                        that.confirmed_list = []
+                        that.order_list = []
                         for (i = 0; i < response.data.length; ++i) {
-                            response.data[i].fields["id"] = response.data[i].pk
-                            if (response.data[i].fields.status == 4) {
-                                response.data[i].fields.status = "Confirmed"
-                                that.confirmed_list.push(response.data[i].fields)
-                            } else if (response.data[i].fields.status > 0 && response.data[i].fields.status < 4) {
-                                response.data[i].fields.status = "Open"
-                                that.open_list.push(response.data[i].fields)
-                            }
+                            that.order_list.push(response.data[i].fields)
                         }
+                        console.log(that.order_list)
                     }
                 }).catch(function(err) {
                     alert('Error');
