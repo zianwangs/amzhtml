@@ -107,7 +107,7 @@
                             alert("Error: please choose a product first.")
                             location.href = "catalog.html"
                         } else { 
-                            console.log(response.data[0])
+                            console.log(response)
                             that.name = response.data[0].fields.name
                             that.description = response.data[0].fields.description
                             that.email = response.data[0].fields.email
