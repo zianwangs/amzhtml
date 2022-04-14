@@ -56,10 +56,11 @@
 <body>
     <div id="orders_body">
     <h2>Your Orders:</h2>
-    <ul v-for='item in open_list'>
-        <li>Order No: #{item.id},</li> 
-        <li>Dest.: {item.destination},</li> 
-        <li>Arr. Time: {item.arrival_time},</li>
+    <ul v-for='item in order_list'>
+        <li>Order No: #{item.shipid},</li> 
+        <li>Item Name: {item.name},</li> 
+        <li>Amount: {item.amount},</li>
+        <li>Address: X.:{item.address_x} &nbsp; Y.:{item.address_y},</li>
         <li>Status:<b style="color:green"> {item.status}</b></li>
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
@@ -82,6 +83,7 @@
                     } else {
                         that.order_list = []
                         for (i = 0; i < response.data.length; ++i) {
+                            response.data[i].fields["order_id"] = response.data[i].pk
                             that.order_list.push(response.data[i].fields)
                         }
                         console.log(that.order_list)
