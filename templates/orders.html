@@ -57,10 +57,10 @@
     <div id="orders_body">
     <h2>Your Orders:</h2>
     <ul v-for='item in order_list'>
-        <li>Order No: #{item.shipid},</li> 
-        <li>Item Name: {item.name},</li> 
-        <li>Amount: {item.amount},</li>
-        <li>Address: X.:{item.address_x} &nbsp; Y.:{item.address_y},</li>
+        <li>Order No: #{item.shipid},&nbsp;&nbsp;&nbsp;</li> 
+        <li>Item: {item.name},&nbsp;&nbsp;&nbsp;</li> 
+        <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
+        <li>Address: X.:{item.address_x} &nbsp; Y.:{item.address_y},&nbsp;&nbsp;&nbsp;</li>
         <li>Status:<b style="color:green"> {item.status}</b></li>
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
