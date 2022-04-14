@@ -73,7 +73,7 @@
                 E-mail: &nbsp;<input id="e" type="text" v-model="email" disabled required max="500"><br>
             
 
-                <button @click="edit">Edit</button>
+                <button id="EDIT" @click="edit">Edit</button>
                 <button id="sub" @click="submit">Submit</button>
             </div>
           
@@ -112,9 +112,14 @@
             methods: {
                 edit: function() {
                     // unsafe
+                    edit: function() {
+                    // unsafe
                     document.getElementById("p").disabled = false
                     document.getElementById("e").disabled = false
                     document.getElementById("sub").style.display = "inline"
+		             document.getElementById("EDIT").style.display = "none"
+                },
+
                 },
                 submit: function() {
                     that = this;
