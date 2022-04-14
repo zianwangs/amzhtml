@@ -86,7 +86,7 @@
                             response.data[i].fields["order_id"] = response.data[i].pk
                             that.order_list.push(response.data[i].fields)
                         }
-                        that.order_list.sort((a, b) => (parseInt(a["order_id"]) > parseInt(b["order_id"])))
+                        that.order_list.sort((a, b) => (parseInt(a["order_id"]) < parseInt(b["order_id"])))
                     }
                 }).catch(function(err) {
                     alert('Error');
