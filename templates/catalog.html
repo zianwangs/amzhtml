@@ -105,6 +105,7 @@
             mounted: function() {
                 that = this;
                 axios.get("/catalog").then(function(response) {
+                    console.log(response.data)
                     if (response.data.errorMsg != null) {
                         alert(response.data.errorMsg)
                         location.href = 'login.html'
