@@ -67,11 +67,11 @@
 <body>
     <div id="secret_signup">
         <div id="app">
-            <h2>Your Account Information
+            <h2>Confirm Your Order
             </h2>
             <div id="request">
-                Name: &nbsp;<input id="u"type="text" v-model="name" required maxlength="50" disabled><br>
-                Desc.: &nbsp;<input id="p" type="password" v-model="description" disabled required><br>
+                Name: &nbsp;<input id="u"type="text" v-model="name" disabled><br>
+                Desc.: &nbsp;<input id="p" type="text" v-model="description" disabled required><br>
                 Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
                 Your Address: X_coordinate:&nbsp;<input type="number" v-model="address_x" required >&nbsp;Y_Coordinate: <input type="number" v-model="address_y" required>
             
@@ -111,6 +111,7 @@
                             that.description = response.data[0].fields.description
                             that.email = response.data[0].fields.email
                             that.product_id = response.data[0].pk
+                            console.log(that.name)
                         }
                     }).catch(function(err) {
                         alert('Error');
