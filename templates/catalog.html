@@ -62,14 +62,14 @@
             margin-left: 22px;
         }
         #confirm_ {
-            font-size: 20px;
-            width: 200px;
-            height: 50px;
-            width: 96%;
-            margin-left: 8px;
-            padding: auto;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            float: right;
+            margin-right: 25px;
+            margin-top: -12px;
+            font-size: 19px;
+            width: 120px;
+            height: 45px;
+            background-color: black;
+            color: white;   
         }
 
         p {
@@ -87,7 +87,7 @@
     <p>You found {items.length} items.</p>
     <div id="result">
         <ul v-for='(item, i) in items'>
-            <li>Name: {item.name}</li>&nbsp;
+            <li>Name: {item.name}</li>&nbsp;<br>
             <li>Description.: {item.description}</li>&nbsp;
             <br>
             <button id="confirm_" @click="buy(item.pk)">Buy</button>
