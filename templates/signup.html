@@ -65,8 +65,8 @@
                         return
                     }
                     axios.get("signup/"+that.username+"/"+that.password+"/"+that.email).then(function(response) {
-                        if (response.data.status_code == 1) {
-                            alert("Username already exists!")
+                        if (response.data.errorMsg != null) {
+                            alert(response.data.errorMsg)
                         } else {
                             alert("Signup done, please log in now!")
                             location.href = 'login.html'

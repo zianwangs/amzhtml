@@ -56,10 +56,8 @@
                         return
                     }
                     axios.get("login/"+that.username+"/"+that.password).then(function(response) {
-                        if (response.data.status_code == 1) {
-                            alert("User does not exist!")
-                        } else if (response.data.status_code == 2) {
-                            alert("Password is incorrect!")
+                        if (response.data.errorMsg != null) {
+                            alert(response.data.errorMsg)
                         } else {
                             location.href = 'main.html'
                         }
