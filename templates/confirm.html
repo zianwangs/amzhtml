@@ -70,13 +70,14 @@
             <h2>Your Account Information
             </h2>
             <div id="request">
-                Username: &nbsp;<input id="u"type="text" v-model="username" required maxlength="50" disabled><br>
-                Password: &nbsp;<input id="p" type="password" v-model="password" disabled required><br>
-                E-mail: &nbsp;<input id="e" type="text" v-model="email" disabled required max="500"><br>
+                Name: &nbsp;<input id="u"type="text" v-model="item.name" required maxlength="50" disabled><br>
+                Desc.: &nbsp;<input id="p" type="password" v-model="item.description" disabled required><br>
+                Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
+                Your Address: X_coordinate:&nbsp;<input type="number" v-model="address_x" required >&nbsp;Y_Coordinate: <input type="number" v-model="address_y" required>
             
 
-                <button @click="edit">Edit</button>
-                <button id="sub" @click="submit">Submit</button>
+                <button @click="cancel">Cancel</button>
+                <button id="sub" @click="confirm">Confirm</button>
             </div>
           
             
@@ -88,37 +89,38 @@
         var app = new Vue({
             el:"#app",
             data:{
-                username:'',
-                password: '',
-                email: '',
+                product_id: '',
+                name: '',
+                description: '',
+                amount: '',
+                address_x: '',
+                address_y: '',
                 
             },
             mounted: function() {
                 that = this
-                that = this
-                axios.get("aux_get_user_info").then(function(response) {
+                axios.get("aux_get_buy_info").then(function(response) {
                         if (response.data.status_code == 1) {
                             alert("Please log in first!")
                             location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a product first.")
+                            location.href = "catalog.html"
                         } else { 
-                            console.log(response.data[0])
-                            that.username = response.data[0].fields.username
-                            that.password = response.data[0].fields.password
+                            that.name = response.data[0].fields.name
+                            that.description = response.data[0].fields.description
                             that.email = response.data[0].fields.email
-                            
+                            that.product_id = response.data[0].pk
                         }
                     }).catch(function(err) {
                         alert('Error');
                     });
             },
             methods: {
-                edit: function() {
-                    // unsafe
-                    document.getElementById("p").disabled = false
-                    document.getElementById("e").disabled = false
-                    document.getElementById("sub").style.display = "inline"
+                cancel: function() {
+                    location.href = 'catalog.html'
                 },
-                submit: function() {
+                confirm: function() {
                     that = this;
                     if (that.password == '') {
                         alert("Password cannot be empty!")
@@ -132,16 +134,12 @@
                         alert("Invalid Email address!")
                         return
                     }
-                    axios.get("change_user_info/"+that.password+"/"+that.email).then(function(response) {
+                    axios.get("confirm/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
                         if (response.data.status_code == 1) {
                             alert("Please log in first!");
                             location.href = "login.html"
                         } else {
                             alert("Information submitted!")
-                            document.getElementById("sub").style.display = "none"
-                            document.getElementById("p").disabled = true
-                            document.getElementById("e").disabled = true
-                            
                         }
                     }).catch(function(err) {
                         alert('Error');
