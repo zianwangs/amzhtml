@@ -83,7 +83,7 @@
 <body>
     <div id="orders_body">
     <h2>Items in Cart:</h2>
-    <ul v-for='item in order_list'>
+    <div v-for='item in order_list'>
     <ul > 
         <li>Item: {item.name},&nbsp;&nbsp;&nbsp;</li> 
         <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
@@ -94,7 +94,7 @@
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
     <input id="checkbox" type="checkbox">
-    </ul>
+</div>
     <br>
     <h2></h2>
     <button id = "checkout">Checkout</button>
