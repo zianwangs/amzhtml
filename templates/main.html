@@ -26,6 +26,7 @@
       <li id="side_bar_name">Hi, {% verbatim %}{{ username }}{% endverbatim%}!</li>
       <li id="side_bar_start" @click="catalog">Catalog</li>
       <li id="side_bar_orders" @click="orders">Orders</li>
+      <li id="side_bar_drive_orders" @click="cart">Shopping Cart</li>
       <!-- <li id="side_bar_drive_orders" @click="drive_orders">Drive Orders</li>
       <li id="side_bar_driver_info" @click="driver">Driver Info</li> -->
       <li id="side_bar_account" @click="account">Account</li>
@@ -75,6 +76,9 @@
               //   if (this.is_driver) document.getElementById("main_iframe").src = "/driver.html"
               //   else document.getElementById("main_iframe").src = "/not_a_driver.html"
               // },
+              cart: function() {
+                document.getElementById("main_frame").src = "/cart.html"
+              },
               account: function() {
                 document.getElementById("main_iframe").src = "/account.html"
               },
