@@ -102,7 +102,7 @@
         <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y}&nbsp;&nbsp;&nbsp;</li>
         <button id = "remove" @click="remove(item.order_id)">Remove</button>
-        <button id = "edit_">Edit</button>
+        <button id = "edit_" @click="edit(item.order_id)">Edit</button>
         
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
@@ -155,13 +155,29 @@
                     axios.get("/remove_from_cart/"+order_id).then(function(response) {
                     if (response.data.status_code == 1) {
                         alert("Please log in first!")
-                        return
+                        location.href = "login.html"
                     } else if (response.data.status_code == 2) {
                         alert("Error: you do not have this item in your cart!")
                         return
                     } else {
                         alert("Removed!")
                         location.href = "cart.html"
+                    }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                },
+                edit: function(order_id) {
+                    that = this;
+                    axios.get("/edit/"+order_id).then(function(response) {
+                    if (response.data.status_code == 1) {
+                        alert("Please log in first!")
+                        location.href = "login.html"
+                    } else if (response.data.status_code == 2) {
+                        alert("Error: you do not own this cart order!")
+                        return
+                    } else {
+                        location.href = "edit_order.html"
                     }
                     }).catch(function(err) {
                         alert('Error');
@@ -177,7 +193,7 @@
                     axios.get("/checkout/"+orders).then(function(response) {
                     if (response.data.status_code == 1) {
                         alert("Please log in first!")
-                        return
+                        location.href = "login.html"
                     } else if (response.data.status_code == 2) {
                         alert("Error: please only pick items from your cart!")
                         return

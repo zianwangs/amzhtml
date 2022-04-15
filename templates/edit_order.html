@@ -22,19 +22,20 @@
             width: 60%;
             text-align: center;
             padding: auto auto;
-            font-size: 25px;
+            font-size: 22px;
             border: 1px solid black;
             padding-bottom: 40px;
 
         }
         input {
             margin-top: 30px;
-            width: 220px;
+            width: 130px;
             height: 25px;
+            text-align: center;
         }
         select {
             margin-top: 30px;
-            width: 110px;
+            width: 120px;
             height: 22px;
             margin-bottom: 0px;
             text-align: center;
@@ -42,13 +43,14 @@
         button {
             background-color: black;
             color: white;
-            font-size: 20px;
+            font-size: 24px;
             margin-top: 40px;
-         
-            width: 220px;
-            height: 80px;
+            width: 180px;
+            height: 60px;
         }
-        
+        button:hover {
+            cursor: pointer;
+        }
         textarea {
             font-style: normal;
             width: 200px;
@@ -58,35 +60,40 @@
   
         }
 
-        #num {
-            text-align: center;
+        #p {
+            width: 230px;
         }
+
+        #sub {
+            width: 370px;
+            margin-top: 25px;
+            padding-top: -10px;
+            
+        }
+
+        #a, #c {
+            margin-top: 30px;
+            margin-bottom: -30px;
+            padding-bottom: -30px;
+        }
+        
     </style>
 </head>
 <body>
     <div id="secret_signup">
         <div id="app">
-            <h2>Edit Order</h2>
+            <h2>Confirm Your Order
+            </h2>
             <div id="request">
-                Destination: &nbsp;<input id="d" type="text" v-model="destination" required maxlength="50"><br>
-                Arrival Time: &nbsp;<input id="t" type="datetime-local" v-model= "arrival_time" required><br>
-                Passenger Number: &nbsp;<input type="number" v-model="passenger_num"required max="500" id="num"><br>
-                Do you want a shared ride? &nbsp;
-                <select v-model="is_exclusive" id="ex" required>
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                </select><br>
-                Do you have any requirement on vehicle type? &nbsp;<select id="ct" type="text" v-model="car_type" required>
-                    <option selected value="Unspecified">Unspecified</option>
-                    <option value="Sedan">Sedan</option>
-                    <option value="SUV">SUV</option>
-                    <option value="Sports Car">Sports Car</option>
-                    <option value="Convertible">Convertible</option>
-                    <option value="Truck">Truck</option>
-                    <option value="Minivan">Minivan</option>
-                </select><br>
-                Special Info: &nbsp;<textarea id="si" v-model="special_info"></textarea><br>
-                <button @click="submit">Submit Change</button>
+                Name: &nbsp;<input id="u"type="text" v-model="name" disabled><br>
+                Desc.: &nbsp;<input id="p" type="text" v-model="description" disabled required><br>
+                Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
+                Your Address: &nbsp;X.&nbsp;<input type="number" v-model="address_x" required > &nbsp;&nbsp;&nbsp; Y.&nbsp;&nbsp;<input type="number" v-model="address_y" required><br>
+            
+
+                <button id = "c" @click="cancel">Cancel</button>
+                <button id = "a" @click="remove">Remove Item</button>
+                <button id="sub" @click="submit">Submit</button>
             </div>
           
             
@@ -99,67 +106,86 @@
             el:"#app",
             data:{
                 order_id: '',
-                destination: '',
-                arrival_time: '',
-                passenger_num: 0,
-                is_exclusive: "No",
-                car_type:'Unspecified',
-                special_info: '',
+                name: '',
+                description: '',
+                amount: '',
+                address_x: '',
+                address_y: '',
+                
             },
             mounted: function() {
                 that = this
                 axios.get("aux_get_order_info").then(function(response) {
                         if (response.data.status_code == 1) {
                             alert("Please log in first!")
-                        } else {
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a in-cart item first.")
+                            location.href = "cart.html"
+                        } else { 
+                            that.name = response.data[0].fields.name
+                            that.description = response.data[0].fields.description
                             that.order_id = response.data[0].pk
-                            console.log(response.data[0].fields)
-                            that.destination = response.data[0].fields.destination
-                            that.arrival_time = response.data[0].fields.arrival_time
-                            that.passenger_num = response.data[0].fields.passenger_num
-                            that.is_exclusive = response.data[0].fields.is_exclusive ? "No" : "Yes"
-                            that.car_type = response.data[0].fields.car_type
-                            that.special_info = response.data[0].fields.special_info
-                            if (response.data[0].fields.status == 2) {
-                                document.getElementById("t").disabled = true
-                                document.getElementById("d").disabled = true
-                                document.getElementById("ex").disabled = true
-                            }
-                            if (response.data[0].fields.role == "1") {
-                                document.getElementById("ct").disabled = true;
-                                document.getElementById("si").disabled = true;
-                            }
+                            that.amount = response.data[0].fields.amount
+                            that.address_x = response.data[0].fields.address_x
+                            that.address_y = response.data[0].fields.address_y
                         }
                     }).catch(function(err) {
                         alert('Error');
                     });
             },
             methods: {
+                cancel: function() {
+                    location.href = 'cart.html'
+                },
                 submit: function() {
                     that = this;
-                    if (that.destination == '') {
-                        alert('Destination cannot be empty!')
+                    if (that.amount == '') {
+                        alert("Amount cannot be empty!")
                         return
                     }
-                    if (that.arrival_time == '') {
-                        alert("Arrival time cannot be empty!")
+                    if (that.amount > 1000) {
+                        alert("Exceed max purchase limit:1000!")
                         return
                     }
-                    if (that.passenger_num <= 0 || that.passenger_num > 500) {
-                        alert("Please enter a valid passenger number!")
+                    if (that.address_x == '' || that.address_y == '') {
+                        alert("Address cannot be empty!")
                         return
                     }
-                    axios.get("/change_order/"+that.order_id+"/"+that.destination+"/"+that.arrival_time+"/"+that.passenger_num+"/"+that.is_exclusive+"/"+that.car_type+"/"+that.special_info).then(function(response) {
+                    axios.get("add/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
                         if (response.data.status_code == 1) {
-                            alert("Please log in first!")
+                            alert("Please log in first!");
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Item does not exist.")
+                            location.href = "catalog.html" 
                         } else {
-                            alert("Order has been changed!")
-                            location.href = "/orders.html"
+                            alert("Added to Cart!")
+                            location.href = "cart.html"
                         }
                     }).catch(function(err) {
                         alert('Error');
                     });
-                }
+                },
+                remove: function() {
+                    that = this;
+                    axios.get("/remove_from_cart/"+that.order_id).then(function(response) {
+                    if (response.data.status_code == 1) {
+                        alert("Please log in first!")
+                        location.href = "login.html"
+                    } else if (response.data.status_code == 2) {
+                        alert("Error: you do not own this incart item!")
+                        location.href = "cart.html"
+                    } else {
+                        alert("Removed!")
+                        location.href = "cart.html"
+                    }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                },
+                
+                
             },
             
 
