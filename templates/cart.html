@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title></title>
+    <style>
+        h2 {
+            text-align:left;
+            width: 87%;
+            margin-top: 30px;
+            margin-left: 80px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid gray;
+        }
+        ul {
+            font-size: 20px;
+            list-style: none;
+            width: 900px;
+            border: 1px solid gray;
+            margin-left: 120px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+            height: 50px;
+            padding-left: 20px;
+            padding-top: 30px;
+        }
+        li {
+            display: inline;
+        }
+        #edit_ {
+            float: right;
+            margin-right: 25px;
+            margin-top: -12px;
+            font-size: 19px;
+            width: 120px;
+            height: 45px;
+            background-color: black;
+            color: white;   
+        }
+        #edit_:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+        #orders_body {
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="orders_body">
+    <h2>Your Orders:</h2>
+    <ul v-for='item in order_list'>
+        <li>Order No: #{item.shipid},&nbsp;&nbsp;&nbsp;</li> 
+        <li>Item: {item.name},&nbsp;&nbsp;&nbsp;</li> 
+        <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
+        <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y},&nbsp;&nbsp;&nbsp;</li>
+        <li>Status:<b style="color:green"> {item.status}</b></li>
+        <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
+    </ul>
+    <br>
+    
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#orders_body",
+            delimiters: ['{', '}'],
+            data:{
+                order_list: [],
+            },
+            mounted: function() {
+                that = this;
+                axios.get("/orders").then(function(response) {
+                    console.log(response.data)
+                    if (response.data.status_code == 1) {
+                        alert("Please log in first!")
+                    } else {
+                        that.order_list = []
+                        for (i = 0; i < response.data.length; ++i) {
+                            response.data[i].fields["order_id"] = response.data[i].pk
+                            that.order_list.push(response.data[i].fields)
+                        }
+                        that.order_list.sort((a, b) => (parseInt(b["order_id"]) - parseInt(a["order_id"])))
+                        console.log(that.order_list)
+                    }
+                }).catch(function(err) {
+                    alert('Error');
+                });
+            },
+            methods: {
+                view: function(oid, is_confirmed) {
+                    that = this;
+                    axios.get("view/"+oid).then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!")
+                        } else {
+                            if (!is_confirmed) location.href = "/open_order_details.html"
+                            else location.href = "/confirmed_order_details.html"
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                }
+            },
+            
+
+        });
+    </script>
+</body>
+</html>
