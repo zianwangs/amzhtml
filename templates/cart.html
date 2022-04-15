@@ -83,14 +83,17 @@
 <body>
     <div id="orders_body">
     <h2>Items in Cart:</h2>
-    <ul v-for='item in order_list'> 
+    <ul v-for='item in order_list'>
+    <ul > 
         <li>Item: {item.name},&nbsp;&nbsp;&nbsp;</li> 
         <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y}&nbsp;&nbsp;&nbsp;</li>
         <button id = "remove">Remove</button>
         <button id = "edit_">Edit</button>
-        <input id="checkbox" type="checkbox">
+        
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
+    </ul>
+    <input id="checkbox" type="checkbox">
     </ul>
     <br>
     <h2></h2>
