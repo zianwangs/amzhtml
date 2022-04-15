@@ -67,6 +67,10 @@
         #sub {
             width: 370px;
         }
+
+        #a, #c {
+            padding-bottom: -10px;
+        }
         
     </style>
 </head>
@@ -82,8 +86,8 @@
                 Your Address: &nbsp;X.&nbsp;<input type="number" v-model="address_x" required > &nbsp;&nbsp;&nbsp; Y.&nbsp;&nbsp;<input type="number" v-model="address_y" required><br>
             
 
-                <button @click="cancel">Cancel</button>
-                <button @click="cancel">Add To Cart</button>
+                <button id = "c" @click="cancel">Cancel</button>
+                <button id = "a" @click="cancel">Add To Cart</button>
                 <button id="sub" @click="confirm">Checkout Right Now</button>
             </div>
           
