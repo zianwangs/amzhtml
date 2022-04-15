@@ -92,7 +92,7 @@
             
 
                 <button id = "c" @click="cancel">Cancel</button>
-                <button id = "a" @click="cancel">Add To Cart</button>
+                <button id = "a" @click="addToCart">Add To Cart</button>
                 <button id="sub" @click="confirm">Checkout Right Now</button>
             </div>
           
@@ -136,6 +136,36 @@
                 cancel: function() {
                     location.href = 'catalog.html'
                 },
+                addToCart: function() {
+                    that = this;
+                    if (that.amount == '') {
+                        alert("Amount cannot be empty!")
+                        return
+                    }
+                    if (that.amount > 1000) {
+                        alert("Exceed max purchase limit:1000!")
+                        return
+                    }
+                    if (that.address_x == '' || that.address_y == '') {
+                        alert("Address cannot be empty!")
+                        return
+                    }
+                    axios.get("add/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!");
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Item does not exist.")
+                            location.href = "catalog.html" 
+                        } else {
+                            alert("Added to Cart!")
+                            location.href = "cart.html"
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                },
+                
                 confirm: function() {
                     that = this;
                     if (that.amount == '') {
