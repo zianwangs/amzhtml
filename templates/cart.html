@@ -110,7 +110,7 @@
 </div>
     <br>
     <h2></h2>
-    <button id = "checkout">Checkout</button>
+    <button id = "checkout" @click="checkout">Checkout</button>
     <br>
     
     </div>
@@ -175,7 +175,7 @@
                         alert("Please log in first!")
                         return
                     } else if (response.data.status_code == 2) {
-                        alert("Error: you do not have this item in your cart!")
+                        alert("Error: please only pick items from your cart!")
                         return
                     } else {
                         alert("Removed!")
