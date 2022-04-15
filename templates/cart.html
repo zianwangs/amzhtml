@@ -73,6 +73,11 @@
             background-color: black;
             color: white;
         }
+
+        #checkbox {
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +89,7 @@
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y}&nbsp;&nbsp;&nbsp;</li>
         <button id = "remove">Remove</button>
         <button id = "edit_">Edit</button>
+        <input id="checkbox" type="checkbox">
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
     <br>
