@@ -61,7 +61,7 @@
         <li>Item: {item.name},&nbsp;&nbsp;&nbsp;</li> 
         <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y},&nbsp;&nbsp;&nbsp;</li>
-        <li>Status:<b style="color:green"> {item.status}</b></li>
+    
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
     <br>
@@ -76,7 +76,7 @@
             },
             mounted: function() {
                 that = this;
-                axios.get("/orders").then(function(response) {
+                axios.get("/cart").then(function(response) {
                     console.log(response.data)
                     if (response.data.status_code == 1) {
                         alert("Please log in first!")
