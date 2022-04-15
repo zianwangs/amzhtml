@@ -169,6 +169,10 @@
                 },
                 checkout: function() {
                     that = this;
+                    if (that.pick_list.length == 0) {
+                        alert("Please choose at lease one item to checkout!")
+                        return
+                    }
                     orders = that.pick_list.join(',')
                     axios.get("/checkout/"+orders).then(function(response) {
                     if (response.data.status_code == 1) {
