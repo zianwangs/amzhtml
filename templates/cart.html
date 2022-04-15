@@ -43,13 +43,17 @@
             background-color: black;
             color: white;   
         }
-        #edit_:hover {
+        #edit_:hover, #checkout:hover {
             background-color: white;
             color: black;
             cursor: pointer;
         }
         #orders_body {
             padding-bottom: 30px;
+        }
+
+        #checkout {
+            width: 300px;
         }
     </style>
 </head>
@@ -64,7 +68,7 @@
         <button id = "edit_">Edit</button>
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
-    <button id = "edit_">Checkout</button>
+    <button id = "checkout">Checkout</button>
     <br>
     
     </div>
