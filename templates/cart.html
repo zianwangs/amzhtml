@@ -106,7 +106,7 @@
         
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
-    <input id="checkbox" type="checkbox">
+    <input id="checkbox" @click=pick(item.order_id) type="checkbox">
 </div>
     <br>
     <h2></h2>
@@ -120,6 +120,7 @@
             delimiters: ['{', '}'],
             data:{
                 order_list: [],
+                pick_list: [],
             },
             mounted: function() {
                 that = this;
@@ -129,6 +130,7 @@
                         alert("Please log in first!")
                     } else {
                         that.order_list = []
+                        that.pick_list = []
                         for (i = 0; i < response.data.length; ++i) {
                             response.data[i].fields["order_id"] = response.data[i].pk
                             that.order_list.push(response.data[i].fields)
@@ -141,6 +143,13 @@
                 });
             },
             methods: {
+                pick: function(order_id) {
+                    if (this.pick_list.includes(order_id) == false) {
+                        this.pick_list.push(order_id)
+                    } else {
+                        this.pick_list = this.pick_list.filter(function(value, index, arr) { return value != order_id })
+                    }
+                },
                 remove: function(order_id) {
                     that = this;
                     axios.get("/remove_from_cart/"+order_id).then(function(response) {
@@ -154,10 +163,27 @@
                         alert("Removed!")
                         location.href = "cart.html"
                     }
-                }).catch(function(err) {
-                    alert('Error');
-                });
-
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                },
+                checkout: function() {
+                    that = this;
+                    orders = that.pick_list.join(',')
+                    axios.get("/checkout/"+orders).then(function(response) {
+                    if (response.data.status_code == 1) {
+                        alert("Please log in first!")
+                        return
+                    } else if (response.data.status_code == 2) {
+                        alert("Error: you do not have this item in your cart!")
+                        return
+                    } else {
+                        alert("Removed!")
+                        location.href = "cart.html"
+                    }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
                 },
                 view: function(oid, is_confirmed) {
                     that = this;
