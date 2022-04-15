@@ -144,8 +144,8 @@
                         alert("Amount cannot be empty!")
                         return
                     }
-                    if (that.amount > 1000) {
-                        alert("Exceed max purchase limit:1000!")
+                    if (that.amount <= 0 || that.amount > 1000) {
+                        alert("Invalid Amount! Should be in the range 1 to 1000!")
                         return
                     }
                     if (that.address_x == '' || that.address_y == '') {
