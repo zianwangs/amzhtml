@@ -61,7 +61,7 @@
         <li>Item: {item.name},&nbsp;&nbsp;&nbsp;</li> 
         <li>Amount: {item.amount},&nbsp;&nbsp;&nbsp;</li>
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y},&nbsp;&nbsp;&nbsp;</li>
-        <li v-if="item.ups_account_name != 'DEFAULT_NOT_SET'">UPS: {item.ups_account_name}</li>
+        <li v-if="item.ups_account_name != 'DEFAULT_NOT_SET'"> {"UPS:",item.ups_account_name}</li>
         <li>Status:<b style="color:green"> {item.status}</b></li>
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
