@@ -130,9 +130,7 @@
                             that.amount = response.data[0].fields.amount
                             that.address_x = response.data[0].fields.address_x
                             that.address_y = response.data[0].fields.address_y
-                            if (response.data[0].fields.ups_account_name != "DEFAULT_NOT_SET") {
-                                that.ups_account_name = response.data[0].fields.ups_account_name
-                            }
+                            that.ups_account_name = response.data[0].fields.ups_account_name
                         }
                     }).catch(function(err) {
                         alert('Error');
