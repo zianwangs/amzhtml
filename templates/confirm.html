@@ -89,7 +89,7 @@
                 Desc.: &nbsp;<input id="p" type="text" v-model="description" disabled required><br>
                 Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
                 Your Address: &nbsp;X.&nbsp;<input type="number" v-model="address_x" required > &nbsp;&nbsp;&nbsp; Y.&nbsp;&nbsp;<input type="number" v-model="address_y" required><br>
-            
+                UPS Account Name(Optional): &nbsp;<input id="e" type="test" v-model="ups_account_name"><br>
 
                 <button id = "c" @click="cancel">Cancel</button>
                 <button id = "a" @click="addToCart">Add To Cart</button>
@@ -111,6 +111,7 @@
                 amount: '',
                 address_x: '',
                 address_y: '',
+                ups_account_name: '',
                 
             },
             mounted: function() {
@@ -150,7 +151,8 @@
                         alert("Address cannot be empty!")
                         return
                     }
-                    axios.get("add/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
+                    ups = that.ups_account_name == "" ? "DEFAULT_NOT_SET" : that.ups_account_name
+                    axios.get("add/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y+"/"+ups).then(function(response) {
                         if (response.data.status_code == 1) {
                             alert("Please log in first!");
                             location.href = "login.html"
@@ -180,7 +182,8 @@
                         alert("Address cannot be empty!")
                         return
                     }
-                    axios.get("confirm/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y).then(function(response) {
+                    ups = that.ups_account_name == "" ? "DEFAULT_NOT_SET" : that.ups_account_name
+                    axios.get("confirm/"+that.product_id+"/"+that.amount+"/"+that.address_x+"/"+that.address_y+"/"+ups).then(function(response) {
                         if (response.data.status_code == 1) {
                             alert("Please log in first!");
                             location.href = "login.html"
