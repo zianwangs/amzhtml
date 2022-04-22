@@ -141,6 +141,7 @@
             data:{
                 order_list: [],
                 pick_list: [],
+                pickedall: false,
             
             },
             mounted: function() {
@@ -165,17 +166,18 @@
             },
             methods: {
                 pickall: function() {
-                    if (this.pick_list.length != this.order_list.length) {
+                    if (this.pickedall == false) {
                         this.pick_list = structuredClone(this.order_list)
                         checkboxes = document.getElementsByClassName("checkbox")
                         for (i = 0; i < checkboxes.length; ++i)
                             checkboxes[i].checked = true
-                        
+                        this.pickedall = true;
                     } else {
                         this.pick_list = []
                         checkboxes = document.getElementsByClassName("checkbox")
                         for (i = 0; i < checkboxes.length; ++i)
                             checkboxes[i].checked = false
+                        this.pickedall = false
                         
                     }
                 },
