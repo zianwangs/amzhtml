@@ -42,6 +42,7 @@
         }
         
         #result {
+            width: 100%;
             margin-top: 50px;
             background-color: white;
             padding-bottom: 40px;
@@ -103,6 +104,7 @@
 
         li {
             list-style: none;
+            margin-left: 3px;
         }
     </style>
 </head>
@@ -116,7 +118,7 @@
     <div id="result">
         <div id="items" v-for='(item, i) in items'>
             <img v-bind:src=item.img_url>
-            <li>{item.name}</li>
+            <li><b>{item.name}</b>></li>
             <li>{item.description}</li>
             <button id="confirm_" @click="buy(item.product_id)">Buy</button>
         </div>
