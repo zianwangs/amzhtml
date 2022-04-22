@@ -100,6 +100,7 @@
             margin-right: 20px;
             margin-left: 0px;
             padding-bottom: 10px;
+            border: 1px solid #ccc;
         }
 
       
@@ -167,7 +168,9 @@
             methods: {
                 pickall: function() {
                     if (this.pickedall == false) {
-                        this.pick_list = structuredClone(this.order_list)
+                        this.pick_list = []
+                        for (i = 0; i < order_list.length; ++i)
+                            this.pick_list.push(order_list[i]["order_id"])
                         checkboxes = document.getElementsByClassName("checkbox")
                         for (i = 0; i < checkboxes.length; ++i)
                             checkboxes[i].checked = true
