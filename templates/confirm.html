@@ -134,7 +134,7 @@
                             that.description = response.data[0].fields.description
                             that.email = response.data[0].fields.email
                             that.product_id = response.data[0].pk
-                            that.img_url = response.data[0].img_url
+                            that.img_url = response.data[0].fields.img_url
                         }
                     }).catch(function(err) {
                         alert('Error');
