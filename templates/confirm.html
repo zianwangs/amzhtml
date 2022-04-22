@@ -76,6 +76,10 @@
             margin-bottom: -30px;
             padding-bottom: -30px;
         }
+
+        img {
+            
+        }
         
     </style>
 </head>
@@ -85,6 +89,7 @@
             <h2>Confirm Your Order
             </h2>
             <div id="request">
+                <img v-bind:src="img_url">
                 Name: &nbsp;<input id="u"type="text" v-model="name" disabled><br>
                 Desc.: &nbsp;<input id="p" type="text" v-model="description" disabled required><br>
                 Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
@@ -112,6 +117,7 @@
                 address_x: '',
                 address_y: '',
                 ups_account_name: '',
+                img_url:'',
                 
             },
             mounted: function() {
@@ -128,6 +134,7 @@
                             that.description = response.data[0].fields.description
                             that.email = response.data[0].fields.email
                             that.product_id = response.data[0].pk
+                            that.img_url = response.data[0].img_url
                         }
                     }).catch(function(err) {
                         alert('Error');
