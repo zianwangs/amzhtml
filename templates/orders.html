@@ -63,6 +63,7 @@
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y},&nbsp;&nbsp;</li>
         <li v-if="item.ups_account_name != ''"> UPS: {item.ups_account_name}&nbsp;&nbsp;</li>
         <li>Status:<b style="color:green"> {item.status}</b></li>
+        <img v-bind:src=item.img_url> 
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
     <div id="orders_body">
@@ -74,6 +75,7 @@
             <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y},&nbsp;&nbsp;</li>
             <li v-if="item.ups_account_name != ''"> UPS: {item.ups_account_name}&nbsp;&nbsp;</li>
             <li>Status:<b style="color:green"> {item.status}</b></li>
+            <img v-bind:src=item.img_url> 
             <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
         </ul>
     <br>
