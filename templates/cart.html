@@ -102,7 +102,7 @@
         <li>Amount: {item.amount},&nbsp;&nbsp;</li>
         <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y}&nbsp;&nbsp;&nbsp;</li>
         <li v-if="item.ups_account_name != ''">UPS: {item.ups_account_name}</li>
-        <img v-bind:src=item.img_url> 
+        <li><img v-bind:src=item.img_url> </li>
         <button id = "remove" @click="remove(item.order_id)">Remove</button>
         <button id = "edit_" @click="edit(item.order_id)">Edit</button>
         
