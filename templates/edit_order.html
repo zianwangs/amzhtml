@@ -76,6 +76,17 @@
             margin-bottom: -30px;
             padding-bottom: -30px;
         }
+
+        img {
+            display: inline-block;
+            text-align: center;
+           
+            height: 50%;
+            margin-top: 10px;
+
+
+            
+        }
         
     </style>
 </head>
@@ -85,6 +96,7 @@
             <h2>Edit Your Order
             </h2>
             <div id="request">
+                <img v-bind:src="img_url"><br>
                 Name: &nbsp;<input id="u"type="text" v-model="name" disabled><br>
                 Desc.: &nbsp;<input id="p" type="text" v-model="description" disabled required><br>
                 Amount: &nbsp;<input id="e" type="number" v-model="amount" required max="100"><br>
@@ -112,7 +124,7 @@
                 address_x: '',
                 address_y: '',
                 ups_account_name: '',
-                
+                img_url: '',                
             },
             mounted: function() {
                 that = this
@@ -131,6 +143,7 @@
                             that.address_x = response.data[0].fields.address_x
                             that.address_y = response.data[0].fields.address_y
                             that.ups_account_name = response.data[0].fields.ups_account_name
+                            that.img_url = response.data[0].fields.img_url
                         }
                     }).catch(function(err) {
                         alert('Error');
