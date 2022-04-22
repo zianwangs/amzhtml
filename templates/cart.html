@@ -113,7 +113,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Pick All&nbsp;&nbsp;<input id="pickall" type="checkbox"></h2>
+        Pick All&nbsp;&nbsp;<input id="pickall" @click="pickall" type="checkbox"></h2>
     <div v-for='item in order_list'>
     <ul > 
         <li>Item: {item.name},&nbsp;&nbsp;</li> 
@@ -126,7 +126,7 @@
         
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
-    <input id="checkbox" @click=pick(item.order_id) type="checkbox">
+    <input id="checkbox" class="checkbox" @click=pick(item.order_id) type="checkbox">
 </div>
     <br>
     <h2></h2>
@@ -141,6 +141,7 @@
             data:{
                 order_list: [],
                 pick_list: [],
+            
             },
             mounted: function() {
                 that = this;
@@ -163,6 +164,20 @@
                 });
             },
             methods: {
+                pickall: function() {
+                    if (this.pick_list.length == this.order_list.length) {
+                        this.pick_list = []
+                        checkboxes = document.getElementsByClassName("checkbox")
+                        for (i = 0; i < checkboxes.length; ++i)
+                            checkboxes[i].checked = false
+                    } else {
+                        this.pick_list = structuredClone(this.order_list)
+                        checkboxes = document.getElementsByClassName("checkbox")
+                        for (i = 0; i < checkboxes.length; ++i)
+                            checkboxes[i].checked = true
+                        
+                    }
+                },
                 pick: function(order_id) {
                     if (this.pick_list.includes(order_id) == false) {
                         this.pick_list.push(order_id)
