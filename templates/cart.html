@@ -165,16 +165,17 @@
             },
             methods: {
                 pickall: function() {
-                    if (this.pick_list.length == this.order_list.length) {
-                        this.pick_list = []
-                        checkboxes = document.getElementsByClassName("checkbox")
-                        for (i = 0; i < checkboxes.length; ++i)
-                            checkboxes[i].checked = false
-                    } else {
+                    if (this.pick_list.length != this.order_list.length) {
                         this.pick_list = structuredClone(this.order_list)
                         checkboxes = document.getElementsByClassName("checkbox")
                         for (i = 0; i < checkboxes.length; ++i)
                             checkboxes[i].checked = true
+                        
+                    } else {
+                        this.pick_list = []
+                        checkboxes = document.getElementsByClassName("checkbox")
+                        for (i = 0; i < checkboxes.length; ++i)
+                            checkboxes[i].checked = false
                         
                     }
                 },
