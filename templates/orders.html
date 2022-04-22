@@ -55,7 +55,7 @@
 </head>
 <body>
     <div id="orders_body">
-    <h2>Your Orders:</h2>
+    <h2>Ongoing orders:</h2>
     <ul v-for='item in order_list'>
         <li>Tracking No: {item.shipid},&nbsp;&nbsp;</li> 
         <li>Item: {item.name},&nbsp;&nbsp;</li> 
@@ -65,6 +65,17 @@
         <li>Status:<b style="color:green"> {item.status}</b></li>
         <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
     </ul>
+    <div id="orders_body">
+        <h2>Delivered orders:</h2>
+        <ul v-for='item in delivered_order_list'>
+            <li>Tracking No: {item.shipid},&nbsp;&nbsp;</li> 
+            <li>Item: {item.name},&nbsp;&nbsp;</li> 
+            <li>Amount: {item.amount},&nbsp;&nbsp;</li>
+            <li>Address: X.{item.address_x} &nbsp; Y.{item.address_y},&nbsp;&nbsp;</li>
+            <li v-if="item.ups_account_name != ''"> UPS: {item.ups_account_name}&nbsp;&nbsp;</li>
+            <li>Status:<b style="color:green"> {item.status}</b></li>
+            <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
+        </ul>
     <br>
     
     </div>
@@ -74,6 +85,7 @@
             delimiters: ['{', '}'],
             data:{
                 order_list: [],
+                delivered_order_list:[],
             },
             mounted: function() {
                 that = this;
@@ -85,7 +97,10 @@
                         that.order_list = []
                         for (i = 0; i < response.data.length; ++i) {
                             response.data[i].fields["order_id"] = response.data[i].pk
-                            that.order_list.push(response.data[i].fields)
+                            if (response.data[i].fields["status"] == "delivered")
+                                that.delivered_order_list.push(response.data[i].fields)
+                            else
+                                that.order_list.push(response.data[i].fields)
                         }
                         that.order_list.sort((a, b) => (parseInt(b["order_id"]) - parseInt(a["order_id"])))
                         console.log(that.order_list)
