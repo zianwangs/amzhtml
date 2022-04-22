@@ -99,6 +99,10 @@
             
         }
 
+        #items:hover {
+            box-shadow: 0px 0px 20px -4px rgba(0, 0,0, 0.3);
+        }
+
         img {
             width: 240px;
             height: 250px
@@ -118,7 +122,7 @@
     <button @click="search">Search</button><br>
     <p>You found {items.length} items.</p>
     <div id="result">
-        <div id="items" v-for='(item, i) in items'>
+        <div id="items" v-for='(item, i) in items' @click="buy(item.product_id)">
             <img v-bind:src=item.img_url>
             <li><b>{item.name}</b></li>
             <li>{item.description}</li>
