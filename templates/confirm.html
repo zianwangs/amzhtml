@@ -177,11 +177,7 @@
                             for (i = 0; i < response.data.length; ++i) {
                                 that.comments.push(response.data[i].fields)
                             }
-                            console.log(that.comments)
-                            console.log(that.num_of_comments)
-                            that.num_of_comments = comments.length
-                            console.log("here")
-                            console.log(that.num_of_comments)
+                            that.num_of_comments = that.comments.length
                         }
                     }).catch(function(err) {
                         alert('Error');
