@@ -127,7 +127,7 @@
         <div id="items" v-for='(item, i) in items' @click="buy(item.product_id)">
             <img v-bind:src=item.img_url>
             <li><b>{item.name}</b></li>
-            <li>{item.description}</li>
+            <li><i>{item.description}</i></li>
             <li v-if="item.num_rated != 0"> {item.num_bought} people bought, {item.num_rated} rated, Avg. rating: {item.total_score/item_num_rated}</li>
             <li v-else> {item.num_bought} people bought, {item.num_rated} rated, Avg. rating: N/A </li>
             <button id="confirm_" @click="buy(item.product_id)">Buy</button>
