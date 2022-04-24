@@ -88,6 +88,15 @@
 
             
         }
+
+        h3 {
+            text-align:left;
+            width: 87%;
+            margin-top: 30px;
+            margin-left: 80px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid gray;
+        }
         
     </style>
 </head>
@@ -108,6 +117,12 @@
                 <button id = "a" @click="addToCart">Add To Cart</button>
                 <button id="sub" @click="confirm">Checkout Right Now</button>
             </div>
+            
+            <h3>Comments ( {num_of_comments})</h3>
+            <ul v-for = 'comment in comments'>
+                <li>{comment.username}: &nbsp; {comment.comment}</li>
+                
+            </ul>
           
             
         </div>
@@ -126,6 +141,8 @@
                 address_y: '',
                 ups_account_name: '',
                 img_url:'',
+                comments: [],
+
                 
             },
             mounted: function() {
@@ -143,6 +160,21 @@
                             that.email = response.data[0].fields.email
                             that.product_id = response.data[0].pk
                             that.img_url = response.data[0].fields.img_url
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                axios.get("aux_get_comments").then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!")
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a product first.")
+                            location.href = "catalog.html"
+                        } else { 
+                            for (i = 0; i < response.data.length; ++i) {
+                                that.comments.push(response.data[i].fields)
+                            }
                         }
                     }).catch(function(err) {
                         alert('Error');
