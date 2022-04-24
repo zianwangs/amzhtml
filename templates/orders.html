@@ -85,7 +85,7 @@
             <li v-if="item.ups_account_name != ''"> UPS: {item.ups_account_name}&nbsp;&nbsp;</li>
             <li>Status:<b style="color:green"> {item.status}</b></li>
             <img v-bind:src=item.img_url> 
-            <!-- <button id="edit_" @click="view(item.id, false)">View</button> -->
+            <button v-if="item.rated" id="edit_" @click="rate(item.id)">Rate</button>
         </ul>
     <br>
     
@@ -121,6 +121,9 @@
                 });
             },
             methods: {
+                rate: function(order_id) {
+
+                },
                 view: function(oid, is_confirmed) {
                     that = this;
                     axios.get("view/"+oid).then(function(response) {
