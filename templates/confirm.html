@@ -173,6 +173,7 @@
                             alert("Error: please choose a product first.")
                             location.href = "catalog.html"
                         } else { 
+                            console.log("here")
                             for (i = 0; i < response.data.length; ++i) {
                                 that.comments.push(response.data[i].fields)
                             }
