@@ -118,7 +118,7 @@
                 <button id="sub" @click="confirm">Checkout Right Now</button>
             </div>
             
-            <h3>Comments ( {num_of_comments})</h3>
+            <h3>Comments ( {comments.length})</h3>
             <ul v-for = 'comment in comments'>
                 <li>{comment.username}: &nbsp; {comment.comment}</li>
                 
