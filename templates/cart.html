@@ -22,7 +22,7 @@
             font-size: 20px;
             list-style: none;
             width: 900px;
-            border: 1px solid gray;
+            border: 1px solid black;
             margin-left: 80px;
             border-radius: 10px;
             margin-top: 20px;
@@ -103,6 +103,8 @@
             border: 1px solid #ccc;
         }
 
+
+
       
     </style>
 </head>
@@ -115,7 +117,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Pick All&nbsp;&nbsp;<input id="pickall" @click="pickall" type="checkbox"></h2>
-    <div v-for='item in order_list'>
+    <div v-for='item in order_list' id = "items">
     <ul > 
         <li>Item: {item.name},&nbsp;&nbsp;</li> 
         <li>Amount: {item.amount},&nbsp;&nbsp;</li>
