@@ -84,9 +84,47 @@
             height: 50%;
             margin-top: 10px;
             border: 1px solid #ccc;
+        }
 
+        h3 {
+            text-align:left;
+            width: 87%;
+            margin-top: 30px;
+            margin-left: 80px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid gray;
+            font-size: 22px;
+            margin-bottom: 0px;
+        }
 
-            
+        #post {
+            margin-top: -45px;
+            float: right;
+            font-size: 20px;
+            height: 40px;
+            margin-right: 73px;
+        }
+
+        ul {
+            padding-top: 0px;
+            margin-top: 0px;
+        }
+        ul>li {
+            display: inline-block;
+         
+            list-style: none;
+            margin-left: 85px;
+            font-size: 22px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+
+        }
+
+        h4 {
+            border-bottom: 1px solid #ccc;
+            width: 87%;
+            margin-left: 78px;
+            margin-bottom: 17px;
         }
         
     </style>
@@ -108,6 +146,16 @@
                 <button id = "a" @click="remove">Remove Item</button>
                 <button id="sub" @click="submit">Submit</button>
             </div>
+            <br><br><br><br>
+            <h3>Comments ({comments.length})</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;<button id="post" @click = "post">Post a Comment</button>
+            <ul v-for = 'comment in comments'>
+                <li><b>{comment.username}</b>: &nbsp; {comment.comment}</li>
+                <h4></h4>
+                
+            </ul>
           
             
         </div>
@@ -117,6 +165,7 @@
     <script>
         var app = new Vue({
             el:"#app",
+            delimiters: ['{', '}'],
             data:{
                 order_id: '',
                 name: '',
@@ -125,7 +174,9 @@
                 address_x: '',
                 address_y: '',
                 ups_account_name: '',
-                img_url: '',                
+                img_url: '',    
+                product_id: '', 
+                comments: [],           
             },
             mounted: function() {
                 that = this
@@ -145,6 +196,25 @@
                             that.address_y = response.data[0].fields.address_y
                             that.ups_account_name = response.data[0].fields.ups_account_name
                             that.img_url = response.data[0].fields.img_url
+                            that.product_id = response.data[0].fields.product
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
+                    axios.get("aux_get_comments").then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!")
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a product first.")
+                            location.href = "catalog.html"
+                        } else { 
+                            that.comments = []
+                            response.data.sort((a, b) => (b.pk - a.pk))
+                            for (i = 0; i < response.data.length; ++i) {
+                                that.comments.push(response.data[i].fields)
+                            }
+                            
                         }
                     }).catch(function(err) {
                         alert('Error');
@@ -153,6 +223,29 @@
             methods: {
                 cancel: function() {
                     location.href = 'cart.html'
+                },
+                post: function() {
+                    comment = prompt("Please type your comment, 100 characters limited.")
+                    if (comment == "") {
+                        alert("Cannot post an empty comment!")
+                        return
+                    }
+                    that = this
+                    axios.get("post/" + that.product_id+"/"+comment).then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!")
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a product first.")
+                            location.href = "catalog.html"
+                        } else { 
+                            alert("Comment posted.")
+                            location.href = "confirm.html"
+                            
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
                 },
                 submit: function() {
                     that = this;
