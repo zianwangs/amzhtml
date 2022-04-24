@@ -130,11 +130,27 @@
                     }
                    
                     x = parseInt(x)
-                    console.log(x) 
-                    if (x == null) {
+                    
+                    if (x < 1 || x > 5) {
                         alert("Invalid input")
                         return 
                     }
+                    that = this
+                    axios.get("rate/" + order_id+"/"+x).then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!")
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a valid delivered order first.")
+                            location.href = "orders.html"
+                        } else { 
+                            alert("Rated.")
+                            location.href = "orders.html"
+                            
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
                 },
                 view: function(oid, is_confirmed) {
                     that = this;
