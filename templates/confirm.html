@@ -118,7 +118,7 @@
                 <button id="sub" @click="confirm">Checkout Right Now</button>
             </div>
             
-            <h3>Comments ( {comments.length} )</h3>
+            <h3>Comments ({comments.length})</h3>
             <ul v-for = 'comment in comments'>
                 <li>{comments.username}: &nbsp; {comments.comment}</li>
                 
@@ -142,7 +142,6 @@
                 address_y: '',
                 ups_account_name: '',
                 img_url:'',
-                num_of_comments: 0,
                 comments: [],
 
                 
@@ -175,10 +174,11 @@
                             location.href = "catalog.html"
                         } else { 
                             that.comments = []
+                            response.data.sort((a, b) => (b.pk - a.pk))
                             for (i = 0; i < response.data.length; ++i) {
                                 that.comments.push(response.data[i].fields)
                             }
-                            that.num_of_comments = that.comments.length
+                            
                         }
                     }).catch(function(err) {
                         alert('Error');
