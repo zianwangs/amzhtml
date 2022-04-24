@@ -122,15 +122,17 @@
             },
             methods: {
                 rate: function(order_id) {
-                        x = prompt("Please rate this item from 1 ~ 5.")
-                        if (x == null || x == "") {
-                            return "invalid input"
-                        }
-                        x = parseInt(x)
-                        console.log(x)
-                        if (x == null) {
-                            return "invalid input"
-                        }
+                    x = prompt("Please rate this item from 1 ~ 5.")
+                    if (x == null || x == "") {
+                            alert("Invalid input")
+                            return 
+                    }
+                    x = parseInt(x)
+                    console.log(x)
+                    if (x == null) {
+                        alert("Invalid input")
+                        return 
+                    }
                 },
                 view: function(oid, is_confirmed) {
                     that = this;
