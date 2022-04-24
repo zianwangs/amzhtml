@@ -141,7 +141,7 @@
                 address_y: '',
                 ups_account_name: '',
                 img_url:'',
-                num_of_comments: '',
+                num_of_comments: 0,
                 comments: [],
 
                 
@@ -177,7 +177,7 @@
                             for (i = 0; i < response.data.length; ++i) {
                                 that.comments.push(response.data[i].fields)
                             }
-                            console.log("here")
+                            console.log(comments.length)
                             that.num_of_comments = comments.length
                             console.log("here")
                             console.log(that.num_of_comments)
