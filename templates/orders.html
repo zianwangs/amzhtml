@@ -85,7 +85,7 @@
             <li v-if="item.ups_account_name != ''"> UPS: {item.ups_account_name}&nbsp;&nbsp;</li>
             <li>Status:<b style="color:green"> {item.status}</b></li>
             <img v-bind:src=item.img_url> 
-            <button v-if="item.rated == false" id="edit_" @click="rate(item.id)">Rate</button>
+            <button v-if="item.rated == false" id="edit_" @click="rate(item.order_id)">Rate</button>
         </ul>
     <br>
     
