@@ -141,6 +141,7 @@
                 address_y: '',
                 ups_account_name: '',
                 img_url:'',
+                num_of_comments: '',
                 comments: [],
 
                 
@@ -175,6 +176,7 @@
                             for (i = 0; i < response.data.length; ++i) {
                                 that.comments.push(response.data[i].fields)
                             }
+                            that.num_of_comments = comments.length
                         }
                     }).catch(function(err) {
                         alert('Error');
