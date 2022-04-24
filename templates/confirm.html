@@ -118,7 +118,12 @@
                 <button id="sub" @click="confirm">Checkout Right Now</button>
             </div>
             
-            <h3>Comments ({comments.length})</h3>
+            <h3>Comments ({comments.length})</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<button id="post" @click = "post">Post a Comment</button>
             <ul v-for = 'comment in comments'>
                 <li>{comments.username}: &nbsp; {comments.comment}</li>
                 
@@ -187,6 +192,29 @@
             methods: {
                 cancel: function() {
                     location.href = 'catalog.html'
+                },
+                post: function() {
+                    comment = prompt("Please type your comment, 100 characters limited.")
+                    if (comment == "") {
+                        alert("Cannot post an empty comment!")
+                        return
+                    }
+                    that = this
+                    axios.get("post/" + that.product_id+"/"+comment).then(function(response) {
+                        if (response.data.status_code == 1) {
+                            alert("Please log in first!")
+                            location.href = "login.html"
+                        } else if (response.data.status_code == 2) {
+                            alert("Error: please choose a product first.")
+                            location.href = "catalog.html"
+                        } else { 
+                            alert("Comment posted.")
+                            location.href = "confirm.html"
+                            
+                        }
+                    }).catch(function(err) {
+                        alert('Error');
+                    });
                 },
                 addToCart: function() {
                     that = this;
